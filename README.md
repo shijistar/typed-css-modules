@@ -1,5 +1,7 @@
 # typed-css-modules [![Build Status](https://travis-ci.org/Quramy/typed-css-modules.svg?branch=master)](https://travis-ci.org/Quramy/typed-css-modules) [![npm version](https://badge.fury.io/js/typed-css-modules.svg)](http://badge.fury.io/js/typed-css-modules)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Quramy/typed-css-modules.svg)](https://greenkeeper.io/)
+
 Creates TypeScript definition files from [CSS Modules](https://github.com/css-modules/css-modules) .css files.
 
 If you have the following css, 
