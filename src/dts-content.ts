@@ -4,6 +4,7 @@ import * as path from "path";
 import isThere from "is-there";
 import * as mkdirp from 'mkdirp';
 import * as util from "util";
+import { string } from "yargs";
 
 const writeFile = util.promisify(fs.writeFile);
 const readFile = util.promisify(fs.readFile);
@@ -13,6 +14,7 @@ interface DtsContentOptions {
     rootDir: string;
     searchDir: string;
     outDir: string;
+    indent: number;
     rInputPath: string;
     rawTokenList: string[];
     resultList: string[];
@@ -24,6 +26,7 @@ export class DtsContent {
     private rootDir: string;
     private searchDir: string;
     private outDir: string;
+    private indent: number;
     private rInputPath: string;
     private rawTokenList: string[];
     private resultList: string[];
@@ -34,6 +37,7 @@ export class DtsContent {
         this.rootDir = options.rootDir;
         this.searchDir = options.searchDir;
         this.outDir = options.outDir;
+        this.indent = options.indent;
         this.rInputPath = options.rInputPath;
         this.rawTokenList = options.rawTokenList;
         this.resultList = options.resultList;
@@ -48,7 +52,7 @@ export class DtsContent {
         if(!this.resultList || !this.resultList.length) return '';
         return [
             'declare const styles: {',
-            ...this.resultList.map(line => '  ' + line),
+            ...this.resultList.map(line => ' '.repeat(this.indent || 2) + line),
             '};',
             'export = styles;',
             ''

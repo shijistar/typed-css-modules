@@ -15,6 +15,7 @@ interface DtsCreatorOptions {
   outDir?: string;
   camelCase?: CamelCaseOption;
   dropExtension?: boolean;
+  indent?: number;
   EOL?: string;
   loaderPlugins?: Plugin<any>[];
 }
@@ -23,6 +24,7 @@ export class DtsCreator {
   private rootDir: string;
   private searchDir: string;
   private outDir: string;
+  private indent: number;
   private loader: FileSystemLoader;
   private inputDirectory: string;
   private outputDirectory: string;
@@ -35,6 +37,7 @@ export class DtsCreator {
     this.rootDir = options.rootDir || process.cwd();
     this.searchDir = options.searchDir || '';
     this.outDir = options.outDir || this.searchDir;
+    this.indent = options.indent || 0;
     this.loader = new FileSystemLoader(this.rootDir, options.loaderPlugins);
     this.inputDirectory = path.join(this.rootDir, this.searchDir);
     this.outputDirectory = path.join(this.rootDir, this.outDir);
@@ -70,6 +73,7 @@ export class DtsCreator {
         rootDir: this.rootDir,
         searchDir: this.searchDir,
         outDir: this.outDir,
+        indent: this.indent,
         rInputPath,
         rawTokenList: keys,
         resultList: result,

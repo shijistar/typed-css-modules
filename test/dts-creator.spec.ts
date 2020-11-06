@@ -122,6 +122,17 @@ export = styles;
       });
     });
 
+    const indent = 4;
+    it(`output indent is ${indent}`, done => {
+      new DtsCreator({
+        indent,
+      }).create('test/testStyle.css').then(content => {
+        let myClassLine = content.formatted.split(os.EOL).find(s => s.endsWith('readonly "myClass": string;'));
+        assert.ok(myClassLine && myClassLine.startsWith(' '.repeat(indent)));
+        done();
+      });
+    });
+
     describe('#camelCase option', () => {
       it('camelCase == true: returns camelized tokens for lowercase classes', done => {
         new DtsCreator({ camelCase: true })

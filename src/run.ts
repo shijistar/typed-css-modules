@@ -16,6 +16,7 @@ interface RunOptions {
     camelCase?: boolean;
     dropExtension?: boolean;
     silent?: boolean;
+    indent?: string;
 }
 
 export async function run(searchDir: string, options: RunOptions = {}): Promise<void> {
@@ -25,6 +26,7 @@ export async function run(searchDir: string, options: RunOptions = {}): Promise<
         rootDir: process.cwd(),
         searchDir,
         outDir: options.outDir,
+        indent: parseInt(options.indent || "", 10) || 0,
         camelCase: options.camelCase,
         dropExtension: options.dropExtension,
     });

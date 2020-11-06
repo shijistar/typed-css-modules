@@ -16,6 +16,7 @@ const yarg = yargs.usage('Create .css.d.ts from CSS modules *.css files.\nUsage:
   .alias('c', 'camelCase').describe('c', 'Convert CSS class tokens to camelcase').boolean("c")
   .alias('d', 'dropExtension').describe('d', 'Drop the input files extension').boolean('d')
   .alias('s', 'silent').describe('s', 'Silent output. Do not show "files written" messages').boolean('s')
+  .alias('i', 'indent').describe('s', 'Specify the code indent of output content').string('i')
   .alias('h', 'help').help('h')
   .version(require('../package.json').version);
 
@@ -43,9 +44,10 @@ async function main(): Promise<void> {
   await run(searchDir, {
     pattern: argv.p,
     outDir: argv.o,
+    indent: argv.i,
     watch: argv.w,
     camelCase: argv.c,
     dropExtension: argv.d,
-    silent: argv.s
+    silent: argv.s,
   });
 };
